@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Engagement Rate Calculator — Likes, Comments, Followers | CreatorKit</title>
+<meta name="description" content="Calculate your Instagram, TikTok or YouTube engagement rate from likes, comments and followers. Free, private, no sign-up.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23ff6b35'/%3E%3Ctext x='50' y='68' font-size='46' text-anchor='middle' font-family='Arial' font-weight='bold' fill='%23ffffff'%3E%E2%8C%8A%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="canonical" href="https://zacariasfaray-dev.github.io/creatorkit/engagement-calculator.html">
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="logo" href="index.html">Creator<span>Kit</span></a><nav class="top"><a href="index.html#tools">All tools</a></nav></div></header>
+
+<main class="wrap">
+<section class="tool-head">
+  <span class="pill">Engagement Rate Calculator</span>
+  <h1>Know your real engagement</h1>
+  <p class="lead">Likes, comments and followers — calculate your engagement rate per post. Works for Instagram, TikTok and YouTube.</p>
+</section>
+
+<section class="panel">
+  <div class="row2">
+    <div><label for="likes">Likes on the post</label><input id="likes" type="number" value="0" min="0"></div>
+    <div><label for="comments">Comments on the post</label><input id="comments" type="number" value="0" min="0"></div>
+  </div>
+  <div class="row2">
+    <div><label for="followers">Total followers</label><input id="followers" type="number" value="0" min="1"></div>
+    <div><label>Result</label><div class="result" id="out" style="margin-top:0" aria-live="polite">—</div></div>
+  </div>
+</section>
+
+<section class="prose">
+  <h2>What the number means</h2>
+  <p><strong>1–3%:</strong> Average. Most creators sit here — normal for accounts with a few thousand followers.</p>
+  <p><strong>3–6%:</strong> Good. Your audience is engaged and responsive to your content.</p>
+  <p><strong>6%+:</strong> Excellent. Strong community loyalty — this is what brands look for in collaborations.</p>
+  <p><strong>Under 1%:</strong> Low. Consider posting at better times, improving hooks, or engaging more with comments.</p>
+</section>
+
+<section class="faq">
+  <h2>Engagement FAQ</h2>
+  <details><summary>Which platforms does this work for?</summary><p>Instagram, TikTok and YouTube all use likes + comments ÷ followers for engagement rate. The formula is the same; only your audience behavior differs.</p></details>
+  <details><summary>Should I use total likes or per-post likes?</summary><p>Use a single post's likes and comments divided by your follower count at that time. For an account average, average the last 10–15 posts first.</p></details>
+  <details><summary>Is my data uploaded?</summary><p>No — the calculation runs locally in your browser.</p></details>
+</section>
+
+<section class="related">
+  <h2>Related tools</h2>
+  <ul>
+    <li><a href="instagram-hashtags.html">Instagram Hashtags</a></li>
+    <li><a href="twitter-counter.html">Twitter Counter</a></li>
+    <li><a href="youtube-title-generator.html">YouTube Title Generator</a></li>
+  </ul>
+</section>
+</main>
+
+<footer class="site"><div class="wrap"><span>© <span id="ano"></span> CreatorKit — free tools for creators.</span><span><a href="index.html">All tools</a></span></div></footer>
+<script src="script.js"></script>
+<script>
+(function () {
+  var likes = document.getElementById("likes"), comments = document.getElementById("comments"),
+      followers = document.getElementById("followers"), out = document.getElementById("out");
+  function calc() {
+    var l = parseFloat(likes.value) || 0, c = parseFloat(comments.value) || 0, f = parseFloat(followers.value) || 0;
+    if (f === 0) { out.textContent = "—"; return; }
+    var rate = ((l + c) / f) * 100;
+    var label = rate < 1 ? "Low" : rate < 3 ? "Average" : rate < 6 ? "Good" : "Excellent";
+    out.textContent = rate.toFixed(2) + "% — " + label;
+  }
+  [likes, comments, followers].forEach(function (el) { el.addEventListener("input", calc); });
+  calc();
+})();
+</script>
+</body>
+</html>

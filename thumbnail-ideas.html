@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thumbnail Idea Generator — Boost Your CTR | CreatorKit</title>
+<meta name="description" content="Generate text-based thumbnail concepts for YouTube videos to boost click-through rate. Free, private, no sign-up.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23ff6b35'/%3E%3Ctext x='50' y='68' font-size='48' text-anchor='middle' font-family='Arial' font-weight='bold' fill='%23ffffff'%3E%E2%98%85%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="canonical" href="https://zacariasfaray-dev.github.io/creatorkit/thumbnail-ideas.html">
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="logo" href="index.html">Creator<span>Kit</span></a><nav class="top"><a href="index.html#tools">All tools</a></nav></div></header>
+
+<main class="wrap">
+<section class="tool-head">
+  <span class="pill">Thumbnail Idea Generator</span>
+  <h1>Thumbnail concepts that click</h1>
+  <p class="lead">Enter your video topic and get text-based thumbnail concepts — hook, contrast, emotion — to boost your CTR.</p>
+</section>
+
+<section class="panel">
+  <label for="topic">What is your video about?</label>
+  <input id="topic" type="text" placeholder="e.g. how to save money, gaming setup, my trip">
+  <button class="btn" id="gen">Generate ideas</button>
+  <div class="result" id="out" aria-live="polite" style="min-height: 120px; text-align:left">—</div>
+</section>
+
+<section class="prose">
+  <h2>What makes a thumbnail work</h2>
+  <p><strong>One clear hook.</strong> The viewer should understand the video in 1 second. One big emotion, one big statement, one face.</p>
+  <p><strong>High contrast.</strong> Bright subject against a darker background. Yellow, red and orange pop most on YouTube's dark and light themes.</p>
+  <p><strong>Few words.</strong> 2–4 words max in the thumbnail. The title carries the rest.</p>
+</section>
+
+<section class="faq">
+  <h2>Thumbnail FAQ</h2>
+  <details><summary>Should I put my face in every thumbnail?</summary><p>Not every video, but consistent branding helps. If you show your face, use an exaggerated expression — surprise, shock, excitement — that matches the title.</p></details>
+  <details><summary>Does the thumbnail affect CTR?</summary><p>Yes — it's half of the click decision (the other half is the title). A boring thumbnail kills even a great title.</p></details>
+</section>
+
+<section class="related">
+  <h2>Related tools</h2>
+  <ul>
+    <li><a href="youtube-title-generator.html">YouTube Title Generator</a></li>
+    <li><a href="instagram-hashtags.html">Instagram Hashtags</a></li>
+    <li><a href="engagement-calculator.html">Engagement Calculator</a></li>
+  </ul>
+</section>
+</main>
+
+<footer class="site"><div class="wrap"><span>© <span id="ano"></span> CreatorKit — free tools for creators.</span><span><a href="index.html">All tools</a></span></div></footer>
+<script src="script.js"></script>
+<script>
+(function () {
+  var topic = document.getElementById("topic"), out = document.getElementById("out"), gen = document.getElementById("gen");
+  var HOOKS = ["Shocking result after {}", "I tried {} for 30 days", "{} in 60 seconds", "{} — honest review", "Stop doing {} (do this instead)", "{} vs {}: real test", "The {} mistake everyone makes", "I spent $1000 on {} — worth it?", "{} secrets nobody tells you", "From {} to {} in 7 days"];
+  var FACES = ["shocked face", "pointing at text", "thinking face", "excited smile", "disappointed shake head"];
+  var COLORS = ["yellow arrow", "red circle", "green checkmark", "big white text", "black box highlight"];
+  function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+  function fill(tpl, t) { return tpl.replace(/{}/g, t).replace(/{}/g, "another " + t); }
+  gen.addEventListener("click", function () {
+    var t = topic.value.trim();
+    if (!t) { out.textContent = "Enter a topic first."; return; }
+    var ideas = [];
+    for (var i = 0; i < 5; i++) {
+      var hook = fill(pick(HOOKS), t);
+      var face = pick(FACES);
+      var color = pick(COLORS);
+      ideas.push((i + 1) + ". " + hook + " · Face: " + face + " · Visual: " + color);
+    }
+    out.textContent = ideas.join("\n\n");
+  });
+})();
+</script>
+</body>
+</html>

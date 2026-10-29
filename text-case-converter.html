@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Text Case Converter — Uppercase, Lowercase, Title Case | CreatorKit</title>
+<meta name="description" content="Convert text to uppercase, lowercase, title case, snake_case, camelCase and more. Free, private, no sign-up.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23ff6b35'/%3E%3Ctext x='50' y='66' font-size='46' text-anchor='middle' font-family='Arial' font-weight='bold' fill='%23ffffff'%3EA%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="canonical" href="https://zacariasfaray-dev.github.io/creatorkit/text-case-converter.html">
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="logo" href="index.html">Creator<span>Kit</span></a><nav class="top"><a href="index.html#tools">All tools</a></nav></div></header>
+
+<main class="wrap">
+<section class="tool-head">
+  <span class="pill">Text Case Converter</span>
+  <h1>Change text case instantly</h1>
+  <p class="lead">Paste your text and convert to uppercase, lowercase, title case, sentence case, snake_case, camelCase and more.</p>
+</section>
+
+<section class="panel">
+  <label for="txt">Paste or type your text</label>
+  <textarea id="txt" placeholder="hello world example"></textarea>
+  <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px">
+    <button class="btn" id="btn-upper">UPPERCASE</button>
+    <button class="btn" id="btn-lower">lowercase</button>
+    <button class="btn" id="btn-title">Title Case</button>
+    <button class="btn" id="btn-sentence">Sentence case</button>
+    <button class="btn" id="btn-snake">snake_case</button>
+    <button class="btn" id="btn-camel">camelCase</button>
+    <button class="btn" id="btn-kebab">kebab-case</button>
+  </div>
+  <div class="result" id="out" aria-live="polite" style="min-height: 60px">—</div>
+  <button class="btn" id="copy" style="background:var(--surface-2);color:var(--text);border:1px solid var(--line);margin-top:10px">Copy result</button>
+</section>
+
+<section class="prose">
+  <h2>When to use each case</h2>
+  <p><strong>UPPERCASE:</strong> Headers, emphasis, acronyms. Use sparingly — it's harder to read in long blocks.</p>
+  <p><strong>Title Case:</strong> Titles, headlines, video titles. Capitalizes major words — perfect for YouTube titles.</p>
+  <p><strong>snake_case:</strong> File names, database columns, Python variables.</p>
+  <p><strong>camelCase:</strong> JavaScript variables, function names, JSON keys.</p>
+  <p><strong>kebab-case:</strong> URLs, CSS classes, HTML IDs, file names for the web.</p>
+</section>
+
+<section class="faq">
+  <h2>Converter FAQ</h2>
+  <details><summary>Is my text uploaded?</summary><p>No. Conversion happens entirely in your browser; nothing leaves your device.</p></details>
+  <details><summary>Can I convert large texts?</summary><p>Yes — there's no practical limit other than your browser's textarea capacity.</p></details>
+</section>
+
+<section class="related">
+  <h2>Related tools</h2>
+  <ul>
+    <li><a href="twitter-counter.html">Twitter Character Counter</a></li>
+    <li><a href="youtube-title-generator.html">YouTube Title Generator</a></li>
+    <li><a href="instagram-hashtags.html">Instagram Hashtags</a></li>
+  </ul>
+</section>
+</main>
+
+<footer class="site"><div class="wrap"><span>© <span id="ano"></span> CreatorKit — free tools for creators.</span><span><a href="index.html">All tools</a></span></div></footer>
+<script src="script.js"></script>
+<script>
+(function () {
+  var txt = document.getElementById("txt"), out = document.getElementById("out");
+  var fns = {
+    upper: function (s) { return s.toUpperCase(); },
+    lower: function (s) { return s.toLowerCase(); },
+    title: function (s) { return s.replace(/\w\S*/g, function (t) { return t.charAt(0).toUpperCase() + t.substr(1).toLowerCase(); }); },
+    sentence: function (s) { return s.charAt(0).toUpperCase() + s.slice(1).toLowerCase(); },
+    snake: function (s) { return s.toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, ""); },
+    camel: function (s) { return s.toLowerCase().replace(/[^a-z0-9]+(.)/g, function (_, c) { return c.toUpperCase(); }).replace(/^[^a-z]*([a-z])/, function (_, c) { return c.toLowerCase(); }); },
+    kebab: function (s) { return s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, ""); }
+  };
+  function apply(key) {
+    var s = txt.value;
+    if (!s) { out.textContent = "—"; return; }
+    out.textContent = fns[key](s);
+  }
+  document.getElementById("btn-upper").addEventListener("click", function () { apply("upper"); });
+  document.getElementById("btn-lower").addEventListener("click", function () { apply("lower"); });
+  document.getElementById("btn-title").addEventListener("click", function () { apply("title"); });
+  document.getElementById("btn-sentence").addEventListener("click", function () { apply("sentence"); });
+  document.getElementById("btn-snake").addEventListener("click", function () { apply("snake"); });
+  document.getElementById("btn-camel").addEventListener("click", function () { apply("camel"); });
+  document.getElementById("btn-kebab").addEventListener("click", function () { apply("kebab"); });
+  document.getElementById("copy").addEventListener("click", function () {
+    if (out.textContent && out.textContent !== "—") {
+      navigator.clipboard.writeText(out.textContent).then(function () {
+        var self = this; var btn = document.getElementById("copy"); btn.textContent = "Copied!"; setTimeout(function () { btn.textContent = "Copy result"; }, 1500);
+      });
+    }
+  });
+})();
+</script>
+</body>
+</html>

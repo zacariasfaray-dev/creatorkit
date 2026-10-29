@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YouTube Title Generator — Catchy Video Titles | CreatorKit</title>
+<meta name="description" content="Generate catchy, click-worthy YouTube video titles optimized for search and CTR. Free, private, no sign-up.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23ff0000'/%3E%3Ctext x='50' y='68' font-size='50' text-anchor='middle' font-family='Arial' font-weight='bold' fill='%23ffffff'%3E%E2%96%B6%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="canonical" href="https://zacariasfaray-dev.github.io/creatorkit/youtube-title-generator.html">
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="logo" href="index.html">Creator<span>Kit</span></a><nav class="top"><a href="index.html#tools">All tools</a></nav></div></header>
+
+<main class="wrap">
+<section class="tool-head">
+  <span class="pill">YouTube Title Generator</span>
+  <h1>Titles that get clicked</h1>
+  <p class="lead">Enter your video topic and get ready-to-use titles optimized for search, CTR and your niche.</p>
+</section>
+
+<section class="panel">
+  <label for="topic">What is your video about?</label>
+  <textarea id="topic" placeholder="e.g. how to save money, best gaming setup 2026, my trip to Japan"></textarea>
+  <label for="style">Style</label>
+  <select id="style">
+    <option value="listicle">Listicle ("7 Ways to…", "Top 10…")</option>
+    <option value="howto">How-to / Tutorial</option>
+    <option value="curiosity">Curiosity gap ("I tried X for 30 days")</option>
+    <option value="controversial">Controversial / bold claim</option>
+    <option value="review">Review / comparison</option>
+  </select>
+  <button class="btn" id="gen">Generate titles</button>
+  <div class="result" id="out" aria-live="polite">—</div>
+</section>
+
+<section class="prose">
+  <h2>What makes a good YouTube title?</h2>
+  <p><strong>Search + curiosity.</strong> The best titles tell viewers exactly what the video is about while leaving just enough mystery to click. Include your main keyword early.</p>
+  <p><strong>Numbers work.</strong> "7 Ways to Save Money" performs better than "Ways to Save Money" — numbers set expectations and feel scannable.</p>
+  <p><strong>Keep it under 60 characters.</strong> YouTube cuts off long titles in search results and on mobile. Front-load the important words.</p>
+</section>
+
+<section class="faq">
+  <h2>Title FAQ</h2>
+  <details><summary>Should I use clickbait?</summary><p>Use curiosity, not deception. Overpromising and underdelivering hurts your watch time and tells YouTube your video isn't satisfying — which hurts future recommendations.</p></details>
+  <details><summary>Does the title affect SEO?</summary><p>Yes. YouTube uses the title (along with tags and description) to understand your video and show it in search and suggested videos.</p></details>
+  <details><summary>Does it work offline?</summary><p>Yes — title generation happens entirely in your browser.</p></details>
+</section>
+
+<section class="related">
+  <h2>Related tools</h2>
+  <ul>
+    <li><a href="thumbnail-ideas.html">Thumbnail Ideas</a></li>
+    <li><a href="instagram-hashtags.html">Instagram Hashtags</a></li>
+    <li><a href="engagement-calculator.html">Engagement Calculator</a></li>
+  </ul>
+</section>
+</main>
+
+<footer class="site"><div class="wrap"><span>© <span id="ano"></span> CreatorKit — free tools for creators.</span><span><a href="index.html">All tools</a></span></div></footer>
+<script src="script.js"></script>
+<script>
+(function () {
+  const LISTICLE = ["{} Tips for Beginners", "{} You Need to Know in 2026", "{} Ways to {}", "{} Secrets Nobody Tells You", "Top {} {} Ideas for Beginners", "{} Hacks That Actually Work", "The Complete Guide to {} in 2026", "{} Mistakes to Avoid When {}", "{} Ideas You Can Start Today", "{} vs {}: Which One Should You Choose?"];
+  const HOWTO = ["How to {} in {} Days", "How to {} for Beginners (Step by Step)", "How I {} — My Complete Process", "How to {} Without {}", "How to Get Started with {}", "How to Master {} in 30 Days", "How to {} Faster and Easier", "How to {} Like a Pro"];
+  const CURIOSITY = ["I Tried {} for 30 Days — Here's What Happened", "What Happens When You {} for a Month?", "I Stopped {} and This Is What Changed", "The Truth About {} Nobody Talks About", "I Tested {} So You Don't Have To", "Why I {} (And You Should Too)"];
+  const CONTROVERSIAL = ["{} Is Dead — Here's What Replaced It", "Why {} Is a Waste of Time", "Stop {} — Do This Instead", "{} Is Overrated, Try {}", "The Biggest Lie About {}", "Why Everyone Is Wrong About {}"];
+  const REVIEW = ["{} Review: Is It Worth It?", "Best {} of 2026: Full Review", "{} vs {}: Honest Comparison", "I Bought {} So You Don't Have To", "Is {} Still Worth Buying in 2026?"];
+
+  function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+  function fill(tpl, topic) { return tpl.replace(/{}/g, topic); }
+
+  var topic = document.getElementById("topic"), style = document.getElementById("style"),
+      out = document.getElementById("out"), gen = document.getElementById("gen");
+
+  function generate() {
+    var t = topic.value.trim();
+    if (!t) { out.textContent = "Enter a topic first."; return; }
+    var s = style.value;
+    var pools = {
+      listicle: LISTICLE, howto: HOWTO, curiosity: CURIOSITY,
+      controversial: CONTROVERSIAL, review: REVIEW
+    };
+    var pool = pools[s];
+    var results = [];
+    for (var i = 0; i < 5; i++) results.push(fill(pick(pool), t));
+    out.innerHTML = results.map(function (r, i) { return (i + 1) + ". " + r; }).join("<br>");
+  }
+
+  gen.addEventListener("click", generate);
+  topic.addEventListener("input", function () { out.textContent = "—"; });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Twitter / X Character Counter — Stay Under 280 | CreatorKit</title>
+<meta name="description" content="Count characters for Twitter/X posts as you type. Free, private, no sign-up.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%231da1f2'/%3E%3Ctext x='50' y='68' font-size='48' text-anchor='middle' font-family='Arial' font-weight='bold' fill='%23ffffff'%3E%E2%80%A2%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="canonical" href="https://zacariasfaray-dev.github.io/creatorkit/twitter-counter.html">
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="logo" href="index.html">Creator<span>Kit</span></a><nav class="top"><a href="index.html#tools">All tools</a></nav></div></header>
+
+<main class="wrap">
+<section class="tool-head">
+  <span class="pill">Twitter / X Character Counter</span>
+  <h1>Tweet within the limit</h1>
+  <p class="lead">Type your post and see the character count live. Perfect for threads, replies and pinned tweets.</p>
+</section>
+
+<section class="panel">
+  <label for="txt">Write your tweet</label>
+  <textarea id="txt" placeholder="What's happening?"></textarea>
+  <div class="row2">
+    <div><label>Characters</label><div class="result" id="chars" aria-live="polite">0</div></div>
+    <div><label>Remaining</label><div class="result" id="remain" aria-live="polite">280</div></div>
+  </div>
+</section>
+
+<section class="prose">
+  <h2>Twitter/X limits to know</h2>
+  <p><strong>280 characters</strong> per tweet — that includes spaces, emojis and links. Each link counts as 23 characters regardless of its actual length.</p>
+  <p><strong>Threads</strong> let you tell longer stories — just number each tweet (1/5, 2/5, etc.) so readers know the order.</p>
+  <p><strong>Pinned tweets</strong> are your profile's first impression — keep them short, punchy and with a clear call to action.</p>
+</section>
+
+<section class="faq">
+  <h2>Counter FAQ</h2>
+  <details><summary>Do emojis count as one character?</summary><p>Most emojis count as 2 characters in Twitter's system, so a single emoji may reduce your limit by 2 instead of 1.</p></details>
+  <details><summary>Is my text uploaded anywhere?</summary><p>No. Counting happens locally in your browser as you type; nothing leaves your device.</p></details>
+</section>
+
+<section class="related">
+  <h2>Related tools</h2>
+  <ul>
+    <li><a href="instagram-hashtags.html">Instagram Hashtags</a></li>
+    <li><a href="engagement-calculator.html">Engagement Calculator</a></li>
+    <li><a href="youtube-title-generator.html">YouTube Title Generator</a></li>
+  </ul>
+</section>
+</main>
+
+<footer class="site"><div class="wrap"><span>© <span id="ano"></span> CreatorKit — free tools for creators.</span><span><a href="index.html">All tools</a></span></div></footer>
+<script src="script.js"></script>
+<script>
+(function () {
+  var txt = document.getElementById("txt"), chars = document.getElementById("chars"), remain = document.getElementById("remain");
+  var MAX = 280;
+  txt.addEventListener("input", function () {
+    var c = txt.value.length;
+    var r = MAX - c;
+    chars.textContent = c;
+    remain.textContent = r;
+    if (r < 0) { chars.style.color = "#ff6b6c"; remain.style.color = "#ff6b6c"; }
+    else if (r < 20) { chars.style.color = "#ffb300"; remain.style.color = "#ffb300"; }
+    else { chars.style.color = ""; remain.style.color = ""; }
+  });
+})();
+</script>
+</body>
+</html>

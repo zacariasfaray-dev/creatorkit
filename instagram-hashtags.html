@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Instagram Hashtag Generator | CreatorKit</title>
+<meta name="description" content="Generate relevant Instagram hashtags for your niche. Free, private, no sign-up.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23ff6b35'/%3E%3Ctext x='50' y='66' font-size='46' text-anchor='middle' font-family='Arial' font-weight='bold' fill='%23ffffff'%3E%23%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="canonical" href="https://zacariasfaray-dev.github.io/creatorkit/instagram-hashtags.html">
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="logo" href="index.html">Creator<span>Kit</span></a><nav class="top"><a href="index.html#tools">All tools</a></nav></div></header>
+
+<main class="wrap">
+<section class="tool-head">
+  <span class="pill">Instagram Hashtag Generator</span>
+  <h1>Hashtags that get reach</h1>
+  <p class="lead">Pick your niche and get a ready-to-copy set of hashtags for your next post.</p>
+</section>
+
+<section class="panel">
+  <label for="niche">Your niche / topic</label>
+  <select id="niche">
+    <option value="fitness">Fitness &amp; Gym</option>
+    <option value="food">Food &amp; Recipes</option>
+    <option value="travel">Travel</option>
+    <option value="photography">Photography</option>
+    <option value="fashion">Fashion &amp; Style</option>
+    <option value="business">Business &amp; Marketing</option>
+    <option value="gaming">Gaming</option>
+    <option value="motivation">Motivation</option>
+    <option value="pets">Pets &amp; Animals</option>
+    <option value="tech">Tech &amp; Gadgets</option>
+    <option value="custom">Custom (type your own)</option>
+  </select>
+  <div id="custom-wrap" style="display:none;margin-top:10px">
+    <label>Type your topic</label><input id="custom-topic" type="text" placeholder="e.g. minimalist living">
+  </div>
+  <label for="count">How many hashtags</label>
+  <select id="count">
+    <option value="15">15 (recommended)</option>
+    <option value="30">30 (maximum)</option>
+    <option value="10">10</option>
+    <option value="5">5</option>
+  </select>
+  <button class="btn" id="gen">Generate hashtags</button>
+  <div class="result" id="out" aria-live="polite">—</div>
+</section>
+
+<section class="prose">
+  <h2>How to use hashtags on Instagram</h2>
+  <p><strong>Mix sizes.</strong> Combine a few huge hashtags (#travel, millions of posts) with medium and niche ones (#solotravelportugal, thousands). Niche hashtags give you better reach per post.</p>
+  <p><strong>3–15 is the sweet spot.</strong> Instagram allows up to 30, but most creators see better results with 8–15 highly relevant hashtags than spamming 30 random ones.</p>
+  <p><strong>Put them in the first comment.</strong> Keeps your caption clean while still being discoverable.</p>
+</section>
+
+<section class="faq">
+  <h2>Hashtag FAQ</h2>
+  <details><summary>Do banned hashtags hurt my reach?</summary><p>Yes. If a hashtag is banned or restricted, Instagram may limit your post's reach. Avoid overly generic spammy tags like #likeforlike or #followme.</p></details>
+  <details><summary>Can I reuse the same hashtags every post?</summary><p>Instagram may flag repetitive identical sets as spam. Rotate your hashtags and create different sets for different types of content.</p></details>
+</section>
+
+<section class="related">
+  <h2>Related tools</h2>
+  <ul>
+    <li><a href="engagement-calculator.html">Engagement Calculator</a></li>
+    <li><a href="youtube-title-generator.html">YouTube Title Generator</a></li>
+    <li><a href="thumbnail-ideas.html">Thumbnail Ideas</a></li>
+  </ul>
+</section>
+</main>
+
+<footer class="site"><div class="wrap"><span>© <span id="ano"></span> CreatorKit — free tools for creators.</span><span><a href="index.html">All tools</a></span></div></footer>
+<script src="script.js"></script>
+<script>
+(function () {
+  var SETS = {
+    fitness: ["#fitness", "#gym", "#workout", "#health", "#fitnessmotivation", "#gymmotivation", "#train", "#bodybuilding", "#fitnessjourney", "#healthylifestyle", "#workoutroutine", "#gymlife", "#strength", "#cardio", "#fitnessmodel"],
+    food: ["#foodie", "#food", "#foodporn", "#instafood", "#foodstagram", "#yummy", "#delicious", "#foodlover", "#cooking", "#homemade", "#foodblogger", "#tasty", "#foodphotography", "#recipe", "#eat"],
+    travel: ["#travel", "#travelgram", "#wanderlust", "#explore", "#travelgram", "#traveller", "#adventure", "#vacation", "#travelphotography", "#instatravel", "#worldtraveler", "#traveling", "#trip", "#nature", "#traveltheworld"],
+    photography: ["#photography", "#photooftheday", "#photographer", "#photoshoot", "#photographylover", "#picoftheday", "#art", "#photo", "#photographylovers", "#creative", "#canon", "#nikon", "#streetphotography", "#portrait", "#landscape"],
+    fashion: ["#fashion", "#outfit", "#ootd", "#style", "#fashionista", "#clothes", "#fashionblogger", "#look", "#trendy", "#styleinspo", "#fashiongram", "#outfitoftheday", "#fashionstyle", "#shopping", "#fashionlover"],
+    business: ["#business", "#entrepreneur", "#marketing", "#success", "#businessowner", "#startup", "#motivation", "#leadership", "#smallbusiness", "#businessmindset", "#digitalmarketing", "#businesswoman", "#businessman", "#entrepreneurship", "#hustle"],
+    gaming: ["#gaming", "#gamer", "#games", "#videogames", "#gamingcommunity", "#pcgaming", "#console", "#gamerlife", "#esports", "#playstation", "#xbox", "#nintendo", "#gamers", "#twitch", "#fortnite"],
+    motivation: ["#motivation", "#motivational", "#inspiration", "#successmindset", "#morningmotivation", "#quoteoftheday", "#mindset", "#goals", "#inspire", "#selfimprovement", "#motivationalquotes", "#dailyinspiration", "#keepgoing", "#believe", "#achieve"],
+    pets: ["#pets", "#dog", "#dogsofinstagram", "#cat", "#cats", "#pet", "#dogstagram", "#catsofinstagram", "#puppy", "#kitten", "#animals", "#petlover", "#doglover", "#catlover", "#petsagram"],
+    tech: ["#tech", "#technology", "#gadgets", "#technews", "#innovation", "#geek", "#programming", "#developer", "#ai", "#smartphone", "#techreview", "#techlover", "#techlife", "#future", "#techworld"]
+  };
+  var niche = document.getElementById("niche"), customWrap = document.getElementById("custom-wrap"),
+      customTopic = document.getElementById("custom-topic"), count = document.getElementById("count"),
+      out = document.getElementById("out"), gen = document.getElementById("gen");
+  niche.addEventListener("change", function () { customWrap.style.display = niche.value === "custom" ? "block" : "none"; });
+  function rand(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+  gen.addEventListener("click", function () {
+    var n = +count.value;
+    var topic = niche.value === "custom" ? customTopic.value.trim() : niche.value;
+    var base = SETS[niche.value] || [];
+    var tags = [];
+    if (niche.value === "custom" && topic) {
+      var word = topic.replace(/[^a-z0-9]/gi, "").toLowerCase();
+      tags.push("#" + word);
+      base = base.concat(["#" + topic.split(" ").join("")]);
+    }
+    while (tags.length < n) {
+      var t = rand(base);
+      if (!tags.includes(t)) tags.push(t);
+    }
+    out.textContent = tags.slice(0, n).join(" ");
+  });
+})();
+</script>
+</body>
+</html>
